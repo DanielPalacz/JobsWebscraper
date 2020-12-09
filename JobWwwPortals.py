@@ -20,7 +20,7 @@ class NoFluffJobsPl(WwwItJobPortal):
 
     def __init__(self):
         super().__init__("https://nofluffjobs.com/pl")
-        self.__file_session_repository = JobsFileHandler(NoFluffJobsPl.__name__)
+        self.__file_session_repository = JobsFileHandler(NoFluffJobsPl.__name__ + "_")
         self.__subpages_webelements = []
         self.__job_links = []
         self.__scrapping_details = []
@@ -78,26 +78,30 @@ class NoFluffJobsPl(WwwItJobPortal):
     def __get_all_www_links(self):
         # get subpages first
         self.__get_subpages_objects()
-
-        i = 1
-        for subpage in self.__subpages_webelements:
-            time.sleep(1)
-            subpage.click()
+        for index, subpage in enumerate(self.__subpages_webelements):
+            if index != 0:
+                time.sleep(2)
+                subpage.click()
             time.sleep(1)
             job_objects = self.driver.find_elements_by_xpath("//nfj-search-results/nfj-postings-list/a")
             for job_obj in job_objects:
                 self.__job_links.append(job_obj.get_attribute("href"))
 
-    def __get_technologies_from_single_www(self, link: str) -> list():
-        pass
+    def __store_technologies_from_single_www(self, link: str) -> list():
+        job_adv_technologies = [link]
+        time.sleep(2)
+        self.driver.get(link)
+        time.sleep(2)
+        skills_list = \
+            self.driver.find_elements_by_xpath("//nfj-posting-requirements/common-posting-item-tag/button")
+        skills_list += self.driver.find_elements_by_xpath("//nfj-posting-requirements/common-posting-item-tag/object/a")
+        for competency in skills_list:
+            job_adv_technologies.append(competency.text)
+        self.__file_session_repository.update_filedb(",".join(job_adv_technologies))
 
-    def __save_technologies_from_single_www(self, technologies: list()):
-        pass
-
-    def __store_all_scraped_data_in_filedb(self):
-        self.__file_session_repository.initiate_filedb()
+    def __scrap_and_store_all_data_in_filedb(self):
         for job_advertisement in self.__job_links:
-            pass
+            self.__store_technologies_from_single_www(job_advertisement)
 
     def start_session_with_def_configuration(self, implicit_timeout=5):
         self.driver.get(self.www_address)
@@ -111,8 +115,9 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.__set_scrapping_details(*scrapping_args)
         time.sleep(2)
         self.__get_all_www_links()
-        for link in self.__job_links:
-            print(link)
+
+        self.__file_session_repository.initiate_filedb(*self.__scrapping_details)
+        self.__scrap_and_store_all_data_in_filedb()
 
 
 if __name__ == "__main__":

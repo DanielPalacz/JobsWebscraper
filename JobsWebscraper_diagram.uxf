@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>30</y>
-      <w>360</w>
-      <h>160</h>
+      <x>549</x>
+      <y>99</y>
+      <w>324</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>WwwItJobPortal
 
@@ -22,10 +22,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>280</y>
-      <w>460</w>
-      <h>320</h>
+      <x>810</x>
+      <y>378</y>
+      <w>414</w>
+      <h>288</h>
     </coordinates>
     <panel_attributes>NoFluffJobsPl
 
@@ -41,11 +41,10 @@
 -__choose_testing_category(): None
 -__choose_python_technology(): None
 -__choose_selenium_technology(): None
--__get_technologies_from_single_www(str): list()
--__save_technologies_from_single_www(list()): None
 -__set_scrapping_rules(TechDomainAnalyzer.technologies_filter): None
 -__get_all_www_links(): list()
--__store_all_scraped_data_in_filedb(): None
+-__store_technologies_from_single_www(str): list()
+-__scrap_and_store_all_data_in_filedb(): None
 +start_session_with_def_configuration(): None
 +run_data_scraper(): None
 
@@ -55,10 +54,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>50</y>
-      <w>370</w>
-      <h>30</h>
+      <x>180</x>
+      <y>108</y>
+      <w>333</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Selenium.webdriver.Chrome</panel_attributes>
     <additional_attributes/>
@@ -66,43 +65,43 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>180</y>
-      <w>380</w>
-      <h>120</h>
+      <x>774</x>
+      <y>234</y>
+      <w>261</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;360.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;270.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>50</y>
-      <w>160</w>
-      <h>50</h>
+      <x>504</x>
+      <y>108</y>
+      <w>63</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>90</y>
-      <w>160</w>
-      <h>40</h>
+      <x>504</x>
+      <y>153</y>
+      <w>63</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;..</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>90</y>
-      <w>370</w>
-      <h>40</h>
+      <x>180</x>
+      <y>153</y>
+      <w>333</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>webdriver_manager.chrome.ChromeDriverManager</panel_attributes>
     <additional_attributes/>
@@ -110,10 +109,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>50</x>
-      <y>320</y>
-      <w>320</w>
-      <h>110</h>
+      <x>180</x>
+      <y>360</y>
+      <w>288</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>JustJoinItPl
 --</panel_attributes>
@@ -122,21 +121,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>180</y>
-      <w>510</w>
-      <h>160</h>
+      <x>306</x>
+      <y>234</y>
+      <w>360</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>490.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>380.0;10.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>590</y>
-      <w>380</w>
-      <h>220</h>
+      <x>342</x>
+      <y>531</y>
+      <w>342</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>TechDomainAnalyzer
 
@@ -157,60 +156,39 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>330</y>
-      <w>270</w>
-      <h>100</h>
+      <x>522</x>
+      <y>369</y>
+      <w>243</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>JobsFileHandler
 --
 +filebasename: str
++filename: str
 --
-+initiate(scraping_rules: str): None
-+update(list()): None
++initiate_filedb(scraping_rules: str): None
++update_filedb(str): None
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>330</y>
-      <w>170</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;150.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>610</x>
-      <y>420</y>
-      <w>30</w>
-      <h>190</h>
+      <x>468</x>
+      <y>450</y>
+      <w>144</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>360</x>
-      <y>340</y>
-      <w>200</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>180.0;30.0;10.0;10.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>140</y>
-      <w>100</w>
-      <h>30</h>
+      <x>225</x>
+      <y>198</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>time</panel_attributes>
     <additional_attributes/>
@@ -218,10 +196,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>110</y>
-      <w>290</w>
-      <h>70</h>
+      <x>306</x>
+      <y>171</y>
+      <w>261</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;..</panel_attributes>
     <additional_attributes>10.0;50.0;270.0;10.0</additional_attributes>
@@ -229,12 +207,34 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>470</y>
-      <w>130</w>
-      <h>150</h>
+      <x>675</x>
+      <y>531</y>
+      <w>153</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;150.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>387</y>
+      <w>72</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>459</x>
+      <y>387</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;30.0</additional_attributes>
   </element>
 </diagram>
