@@ -22,8 +22,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>378</y>
+      <x>837</x>
+      <y>369</y>
       <w>414</w>
       <h>288</h>
     </coordinates>
@@ -46,7 +46,7 @@
 -__store_technologies_from_single_www(str): list()
 -__scrap_and_store_all_data_in_filedb(): None
 +start_session_with_def_configuration(): None
-+run_data_scraper(): None
++run_data_scraper(list()): None
 
 </panel_attributes>
     <additional_attributes/>
@@ -67,11 +67,11 @@
     <coordinates>
       <x>774</x>
       <y>234</y>
-      <w>261</w>
-      <h>162</h>
+      <w>288</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;270.0;160.0</additional_attributes>
+    <additional_attributes>10.0;10.0;300.0;150.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -109,13 +109,24 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
+      <x>135</x>
       <y>360</y>
-      <w>288</w>
-      <h>99</h>
+      <w>324</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>JustJoinItPl
---</panel_attributes>
+
+--
+-__subpages_webelements: list()
+-__file_session_repository: JobsFileHandler()
+-__scrapping_details: list()
+-__job_links: list()
+
+--
+
+...
+...
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -132,25 +143,29 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>342</x>
-      <y>531</y>
-      <w>342</w>
-      <h>198</h>
+      <x>414</x>
+      <y>585</y>
+      <w>351</w>
+      <h>243</h>
     </coordinates>
     <panel_attributes>TechDomainAnalyzer
 
 --
--technologies_filter: list()
--source: str
+-__technologies_filter: str
+-__source: str
+-__report_name: str
 
 --
 +setup_tech_filters(): None
-+setup_source(): None
++setup_job_source(): None
 +get_tech_filters(): list()
-+get_source(): str
++get_job_source(): str
 
-+get_top10_technologies(): list()
-+plot_top10_technologies_trends(): None</panel_attributes>
+-__set_report_name(datetime.date()): None
+-__get_all_unique technologies(): set()
+
++generate_tech_popularity_report(): None
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -174,13 +189,13 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>468</x>
+      <x>540</x>
       <y>450</y>
-      <w>144</w>
-      <h>99</h>
+      <w>72</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>60.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -207,34 +222,34 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>675</x>
-      <y>531</y>
-      <w>153</w>
-      <h>45</h>
+      <x>756</x>
+      <y>540</y>
+      <w>99</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;30.0</additional_attributes>
+    <additional_attributes>10.0;60.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>756</x>
-      <y>387</y>
-      <w>72</w>
-      <h>36</h>
+      <y>378</y>
+      <w>99</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;20.0;60.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>459</x>
+      <x>450</x>
       <y>387</y>
-      <w>81</w>
+      <w>90</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;30.0</additional_attributes>
+    <additional_attributes>80.0;10.0;10.0;30.0</additional_attributes>
   </element>
 </diagram>

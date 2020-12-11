@@ -87,7 +87,7 @@ class NoFluffJobsPl(WwwItJobPortal):
             for job_obj in job_objects:
                 self.__job_links.append(job_obj.get_attribute("href"))
 
-    def __store_technologies_from_single_www(self, link: str) -> list():
+    def __store_technologies_from_single_www(self, link: str):
         job_adv_technologies = [link]
         time.sleep(2)
         self.driver.get(link)
@@ -96,7 +96,7 @@ class NoFluffJobsPl(WwwItJobPortal):
             self.driver.find_elements_by_xpath("//nfj-posting-requirements/common-posting-item-tag/button")
         skills_list += self.driver.find_elements_by_xpath("//nfj-posting-requirements/common-posting-item-tag/object/a")
         for competency in skills_list:
-            job_adv_technologies.append(competency.text)
+            job_adv_technologies.append(competency.text.replace(",", ""))
         self.__file_session_repository.update_filedb(",".join(job_adv_technologies))
 
     def __scrap_and_store_all_data_in_filedb(self):
@@ -109,15 +109,15 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.driver.maximize_window()
         self.__pass_initial_cookies()
 
-    def run_data_scraper(self):
+    def run_data_scraper(self, scrapping_args):
         time.sleep(1)
-        scrapping_args = ["testing", "python", "selenium"]
         self.__set_scrapping_details(*scrapping_args)
         time.sleep(2)
         self.__get_all_www_links()
 
         self.__file_session_repository.initiate_filedb(*self.__scrapping_details)
         self.__scrap_and_store_all_data_in_filedb()
+        self.driver.quit()
 
 
 if __name__ == "__main__":
