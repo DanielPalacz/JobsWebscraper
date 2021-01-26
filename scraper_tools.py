@@ -1,7 +1,14 @@
+"""scraper_tools module
+
+The given module contain 2 main functionalities supporting Job Scrapping:
+--- JobsFileHandler
+--- TechDomainAnalyzer"""
+
 from datetime import date
 
 
 class JobsFileHandler:
+    """Class implementing filedb storage for Job Scrapping activities."""
 
     def __init__(self, source: str):
         self.filebasename = source
@@ -24,6 +31,7 @@ class JobsFileHandler:
 
 
 class TechDomainAnalyzer:
+    """Class implementing Entry-pulpit-menu for using different Job Scrappers functionalities."""
 
     def __init__(self, src: str = "f", technologies: str = "testing,python,selenium"):
         self.__technologies_filter = technologies
@@ -51,8 +59,8 @@ class TechDomainAnalyzer:
         scrapped_data_report += "__" + str(used_day.strftime("%d%m%Y")) + ".txt"
         self.__report_name = scrapped_data_report
 
-    def __get_all_unique_technologies(self) -> set():
-        self.__set_report_name()
+    def __get_all_unique_technologies(self, report_day=date.today()) -> set():
+        self.__set_report_name(report_day)
         all_competencies = []
         try:
             for line in open(self.__report_name, "r"):
@@ -73,13 +81,13 @@ class TechDomainAnalyzer:
         tech_popularity = dict()
         for competency in unique_tech_set:
             tech_popularity[competency] = 0
-        for line in open(self.report_name, "r"):
+        for line in open(self.__report_name, "r"):
             for competency in unique_tech_set:
                 if line.count(competency) > 0:
                     tech_popularity[competency] += 1
         sorted_x = sorted(tech_popularity.items(), key=lambda kv: kv[1], reverse=True)
 
-        popularity_report_name = self.report_name.replace(".txt", "__popularity_report.csv")
+        popularity_report_name = self.__report_name.replace(".txt", "__popularity_report.csv")
         with open(popularity_report_name, "w") as popularity_report_file:
             for k, v in sorted_x:
                 line = str(k) + ",", str(v)
@@ -88,4 +96,6 @@ class TechDomainAnalyzer:
 
 
 if __name__ == "__main__":
-    pass
+    print("Module documentation:")
+    print("-" * 79)
+    print(__doc__)

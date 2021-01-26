@@ -1,3 +1,9 @@
+"""JobWwwwPortals module
+
+The given module implements Scrapping for Job Portals:
+--- NoFluffJobsPl: https://nofluffjobs.com/pl/
+"""
+
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import time
