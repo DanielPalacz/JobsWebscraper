@@ -75,15 +75,16 @@ class TechDomainAnalyzer:
         return set(all_competencies)
 
     def generate_tech_popularity_report(self):
-        unique_tech_set = self.__get_all_unique_technologies()
+        unique_tech_set_initial = self.__get_all_unique_technologies()
+        unique_tech_set = {c.lower() for c in unique_tech_set_initial}
         if len(unique_tech_set) == 0:
             exit()
-        tech_popularity = dict()
-        for competency in unique_tech_set:
-            tech_popularity[competency] = 0
+
+        tech_popularity = {x: 0 for x in unique_tech_set}
+
         for line in open(self.__report_name, "r"):
             for competency in unique_tech_set:
-                if line.count(competency) > 0:
+                if line.lower().count(competency) > 0:
                     tech_popularity[competency] += 1
         sorted_x = sorted(tech_popularity.items(), key=lambda kv: kv[1], reverse=True)
 
