@@ -2,10 +2,11 @@ from JobWwwPortals import NoFluffJobsPl
 import time
 from scraper_tools import TechDomainAnalyzer
 
+import db
+
 
 if __name__ == "__main__":
-    technologies_analyzer = TechDomainAnalyzer()
-    # default values passed to constructor -> technologies_analyzer = TechDomainAnalyzer("f", "testing,python,selenium")
+    technologies_analyzer = TechDomainAnalyzer("f", "python,selenium")
 
     if technologies_analyzer.get_job_source() == "f":
         print("Scrapping technologies related data based on 'https://nofluffjobs.com/pl'")
@@ -15,7 +16,10 @@ if __name__ == "__main__":
         time.sleep(1)
         jobscraper_nofluff1.run_data_scraper(technologies_analyzer.get_tech_filters())
 
-        technologies_analyzer.generate_tech_popularity_report()
+        popularity_report_name = technologies_analyzer.generate_tech_popularity_report()
+
+        db.initialize_db()
+        db.update_db(popularity_report_name)
 
     else:
         print("Sorry, this technologies-scrapper is not implemented.")

@@ -5,6 +5,7 @@ The given module contain 2 main functionalities supporting Job Scrapping:
 --- TechDomainAnalyzer"""
 
 from datetime import date
+import os
 
 
 class JobsFileHandler:
@@ -14,8 +15,15 @@ class JobsFileHandler:
         self.filebasename = source
         self.filename = ""
 
+    @classmethod
+    def __initiate_filedbdirectory(cls):
+        filedbdirectory = "output_file"
+        if not os.path.isdir(filedbdirectory):
+            os.makedirs(filedbdirectory)
+
     def initiate_filedb(self, *scraping_rules):
-        self.filename = self.filebasename
+        JobsFileHandler.__initiate_filedbdirectory()
+        self.filename = "output_files\\" + self.filebasename
         for rule in scraping_rules:
             self.filename += "_" + rule
         today = date.today()
@@ -63,7 +71,7 @@ class TechDomainAnalyzer:
         self.__set_report_name(report_day)
         all_competencies = []
         try:
-            for line in open(self.__report_name, "r"):
+            for line in open("output_files\\" + self.__report_name, "r"):
                 splitted_line_table = line.split(",")
                 for i, v in enumerate(splitted_line_table):
                     if i != 0 and len(v) != 0:
@@ -82,18 +90,20 @@ class TechDomainAnalyzer:
 
         tech_popularity = {x: 0 for x in unique_tech_set}
 
-        for line in open(self.__report_name, "r"):
+        for line in open("output_files\\" + self.__report_name, "r"):
             for competency in unique_tech_set:
                 if line.lower().count(competency) > 0:
                     tech_popularity[competency] += 1
         sorted_x = sorted(tech_popularity.items(), key=lambda kv: kv[1], reverse=True)
 
         popularity_report_name = self.__report_name.replace(".txt", "__popularity_report.csv")
-        with open(popularity_report_name, "w") as popularity_report_file:
+        with open("output_files\\" + popularity_report_name, "w") as popularity_report_file:
             for k, v in sorted_x:
                 line = str(k) + ",", str(v)
                 popularity_report_file.writelines(line)
                 popularity_report_file.writelines("\n")
+
+        return popularity_report_name
 
 
 if __name__ == "__main__":

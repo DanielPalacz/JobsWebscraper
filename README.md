@@ -6,8 +6,10 @@ The first goal of this solution is to produce technologies popularity report. Th
 1. source - job portal used for technologies data scrapping
 2. technologies_filter - list of technologies (or competencies/categories) used for searching job ads
 
-Development state (28/01/2021):
- - generating tech_popularity_report from first source (f-scrapper) is ready.
+Development state (30/01/2021):
+ - generating tech_popularity_report from first source (f-scrapper) is ready
+ - file based storage (dedicated output_files directory)
+ - small single-table SQLite db integrated (JobScraperDB.sqlite)
 #
 #### Possible ways of improvement:
 JobsWebscraper_TasksBoard:
