@@ -6,8 +6,11 @@ The given module implements Scrapping for Job Portals:
 
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-import time
+
 from scraper_tools import JobsFileHandler
+
+import time
+import logging
 
 
 class WwwItJobPortal:
@@ -30,6 +33,7 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.__subpages_webelements = []
         self.__job_links = []
         self.__scrapping_details = []
+        self.logger = logging.getLogger()
 
     def __pass_initial_cookies(self):
         cookie_xpath = "//nfj-cookie-information/div/div/button"
@@ -110,6 +114,7 @@ class NoFluffJobsPl(WwwItJobPortal):
             self.__store_technologies_from_single_www(job_advertisement)
 
     def start_session_with_def_configuration(self, implicit_timeout=5):
+        self.logger.info("Starting session with def configuration. Opening: " + self.www_address)
         self.driver.get(self.www_address)
         self.driver.implicitly_wait(implicit_timeout)
         time.sleep(2)
@@ -117,11 +122,14 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.__pass_initial_cookies()
 
     def run_data_scraper(self, scrapping_args):
+        self.logger.info("Running F-Data scraper with the following filters: " + str(scrapping_args))
         time.sleep(1)
         self.__set_scrapping_details(*scrapping_args)
         time.sleep(2)
+        self.logger.info("Collecting www links for all matching job advertisements.")
         self.__get_all_www_links()
 
+        self.logger.info("Saving all Jobs related data into filedb.")
         self.__file_session_repository.initiate_filedb(*self.__scrapping_details)
         self.__scrap_and_store_all_data_in_filedb()
         self.driver.quit()
