@@ -1,8 +1,9 @@
 from JobWwwPortals import NoFluffJobsPl
-import time
 from scraper_tools import TechDomainAnalyzer
 
 import db
+
+import time
 
 
 if __name__ == "__main__":

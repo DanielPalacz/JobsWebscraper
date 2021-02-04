@@ -47,7 +47,7 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.driver.find_element_by_xpath(category_element_xpath).click()
         testing_xpath = "//nfj-filter-universal-section/section[1]/div/nfj-filter-control[5]/button"
         self.driver.find_element_by_xpath(testing_xpath).click()
-        approve_xpath = "/html/body/ngb-popover-window/div[2]/nfj-filters-wrapper/div/div[3]/div[1]/button[2]"
+        approve_xpath = "//nfj-filters-wrapper/div/div[3]/div[1]/button[2][text()=' Zatwierdź ']"
         self.driver.find_element_by_xpath(approve_xpath).click()
 
     def __choose_python_technology(self):
@@ -55,7 +55,7 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.driver.find_element_by_xpath(technology_xpath).click()
         python_xpath = "//nfj-filter-universal-section/section[1]/div/nfj-filter-control[7]/button"
         self.driver.find_element_by_xpath(python_xpath).click()
-        approve_xpath = "/html/body/ngb-popover-window/div[2]/nfj-filters-wrapper/div/div[3]/div[1]/button[2]"
+        approve_xpath = "//nfj-filters-wrapper/div/div[3]/div[1]/button[2][text()=' Zatwierdź ']"
         self.driver.find_element_by_xpath(approve_xpath).click()
 
     def __choose_selenium_technology(self):
@@ -63,7 +63,7 @@ class NoFluffJobsPl(WwwItJobPortal):
         self.driver.find_element_by_xpath(technology_xpath).click()
         selenium_xpath = "//nfj-filter-universal-section/section[2]/div/nfj-filter-control[2]/button"
         self.driver.find_element_by_xpath(selenium_xpath).click()
-        approve_xpath = "/html/body/ngb-popover-window/div[2]/nfj-filters-wrapper/div/div[3]/div[1]/button[2]"
+        approve_xpath = "//nfj-filters-wrapper/div/div[3]/div[1]/button[2][text()=' Zatwierdź ']"
         self.driver.find_element_by_xpath(approve_xpath).click()
 
     def __set_scrapping_details(self, *args):
@@ -112,6 +112,7 @@ class NoFluffJobsPl(WwwItJobPortal):
     def start_session_with_def_configuration(self, implicit_timeout=5):
         self.driver.get(self.www_address)
         self.driver.implicitly_wait(implicit_timeout)
+        time.sleep(2)
         self.driver.maximize_window()
         self.__pass_initial_cookies()
 
