@@ -128,6 +128,7 @@ class NoFluffJobsPl(WwwItJobPortal):
         time.sleep(2)
         self.logger.info("Collecting www links for all matching job advertisements.")
         self.__get_all_www_links()
+        self.logger.info("In total was collected " + str(len(self.__job_links)) + " job links.")
 
         self.logger.info("Saving all Jobs related data into filedb.")
         self.__file_session_repository.initiate_filedb(*self.__scrapping_details)
